@@ -50,3 +50,4 @@ jobs:
           tag_name: Release
           fail_on_unmatched_files: false
           files: backend.zip,frontend.zip
+          
