@@ -116,7 +116,7 @@ jobs:
 
   empacotar:
     name: Empacotar
-    needs: [build_back, build_front]
+    needs: [build_back, build_front, GerarVersao]
     runs-on: ubuntu-latest
     steps:
      - name: Download Zip Frontend
