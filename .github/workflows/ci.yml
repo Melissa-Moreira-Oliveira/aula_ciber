@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: backend
-          path: build/ci_cd_projeto/backend/dist
+          path: build/ci_cd_projeto/backend/backend.zip
 
   build_front:
     name: Build Front
@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend
-          path: build/ci_cd_projeto/frontend/dist
+          path: build/ci_cd_projeto/backend/backend.zip
 
   empacotar:
     name: Empacotar
