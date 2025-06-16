@@ -172,5 +172,3 @@ jobs:
          tag_name: ${{ needs.GerarVersao.outputs.versao }}
          fail_on_unmatched_files: true
          files: backend.zip, frontend.zip
-message.txt
-6 KB
