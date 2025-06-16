@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: backend
-          path: build/ci_cd_projeto/backend/dist
+          path: build/ci_cd_projeto/backend/backend.zip
 
   build_front:
     name: Build Front
@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend
-          path: build/ci_cd_projeto/backend/dist
+          path: build/ci_cd_projeto/backend/frontend.zip
 
   empacotar:
     name: Empacotar
@@ -73,4 +73,4 @@ jobs:
           body: Release
           tag_name: Release
           fail_on_unmatched_files: true
-          files: backend.zip,frontend.zip
+          files: build/ci_cd_projeto/backend/backend.zip, build/ci_cd_projeto/frontend/frontend.zip
