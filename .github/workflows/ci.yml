@@ -64,12 +64,22 @@ jobs:
     needs: [build_back, build_front]
     runs-on: ubuntu-latest
     steps:
+      - name: Download Zip Frontend
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend
+
+      - name: Download Zip Backend
+        uses: actions/download-artifact@v4
+        with:
+          name: backend
+
       - name: Criar Versão / Release e Tag
         uses: softprops/action-gh-release@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ inputs.token }}
         with:
           body: Release
           tag_name: Release
-          fail_on_unmatched_files: true
-          files: backend.zip,frontend.zip
+          files: backend.zip; frontend.zip
+
