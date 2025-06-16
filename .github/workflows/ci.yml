@@ -6,8 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_back:
-    name: Build Back
+  snapshot:
     runs-on: ubuntu-latest
     steps:
       - name: Baixando o repositório
@@ -15,69 +14,11 @@ jobs:
         with:
           repository: ${{ github.repository }}
           path: build
-      - name: Compila o(s) projeto(s)
-        shell: bash
-        run: |
-          cd build/ci_cd_projeto/backend
-          npm install
-          npm run build
-      - name: Compacta(Zip) buid
-        shell: bash
-        run: |
-          cd build/ci_cd_projeto/backend
-          zip -r backend.zip dist
-      - name: Upload Zip Backend
-        uses: actions/upload-artifact@v4
-        with:
-          name: backend
-          path: build/ci_cd_projeto/backend/backend.zip
 
-  build_front:
-    name: Build Front
-    runs-on: ubuntu-latest
-    steps:
-      - name: Baixando o repositório
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository }}
-          path: build
-      - name: Compila o(s) projeto(s)
+      - name: Exibe conteúdo da pasta
         shell: bash
         run: |
-          cd build/ci_cd_projeto/frontend
-          npm install
-          npm run build
-      - name: Compacta(Zip) buid
-        shell: bash
-        run: |
-          cd build/ci_cd_projeto/frontend
-          zip -r frontend.zip dist
-      - name: Upload Zip Frontend
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend
-          path: build/ci_cd_projeto/frontend/frontend.zip
-
-  empacotar:
-    name: Empacotar
-    needs: [build_back, build_front]
-    runs-on: ubuntu-latest
-    steps:
-     - name: Download Zip Frontend
-       uses: actions/download-artifact@v4
-       with:
-         name: frontend
-     - name: Download Zip Backend
-       uses: actions/download-artifact@v4
-       with:
-         name: backend
-     - name: Criar Versão / Release e Tag
-       uses: softprops/action-gh-release@v2
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       with:
-         body: Release ${{ needs.GerarVersao.outputs.versao }}
-         tag_name: ${{ needs.GerarVersao.outputs.versao }}
-         fail_on_unmatched_files: true
-         files: backend.zip, frontend.zip
+          cd build
+          ls
+          ls ci_cd_projeto
 
